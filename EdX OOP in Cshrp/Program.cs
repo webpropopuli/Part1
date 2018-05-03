@@ -16,7 +16,7 @@ namespace FirstProj
             {
             Console.WriteLine("New Machine created");
             this.Location = this.Model = ""; 
-            this.Capacity = 0;
+            this._capacity = 0;
             }
 
         public VendingMachine(string loc, string mdl = "[unknown]", int cap = 125)
@@ -52,7 +52,9 @@ namespace FirstProj
 
 
         public int Capacity
-        { get; set; }
+        {
+            get => _capacity; set => _capacity = value; 
+        }
 
         public string Model
         {
