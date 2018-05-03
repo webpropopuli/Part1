@@ -8,47 +8,51 @@ namespace FirstProj
 {
     public class VendingMachine
     {
-        public VendingMachine()
-            {
-            Console.WriteLine("New Machine created");
-            this._location = "";
-            this._capacity = 0;
-            this._model = "";
-
-            }
-
-        public VendingMachine(int maxItems)
-        {
-            Console.WriteLine("New Machine created");
-            this._capacity = maxItems;
-        }
-
         private string _location;
         private int _capacity;
         private string _model;
 
-        public void MakeCoffee()
-        {
+        public VendingMachine()
+            {
+            Console.WriteLine("New Machine created");
+            this.Location = this.Model = ""; 
+            this.Capacity = 0;
+            }
 
+        public VendingMachine(string loc, string mdl = "[unknown]", int cap = 125)
+        {
+            Console.WriteLine( "New Machine created" );
+            this.Location = loc;
+            this.Model = mdl;
+            this.Capacity = cap;
+        }
+
+        public VendingMachine(int maxItems)
+        {
+            Console.WriteLine("New Machine created");
+            this.Capacity = maxItems;
+            this.Model = "[unknown]";
         }
 
         public void DispenseItem()
         {
             Console.WriteLine("Dispensing item now...");
-            this._capacity--;
+            this.Capacity--;
             return;
         }
 
-        public int Capacity
-        { get; set; }
 
-        public void ShowStatus()
+        public void ShowStatus(int y = 0)
         {
             Console.WriteLine(
-                "Machine " + this.Model + 
+                "Machine" + y + " " + this.Model + 
                 " is located in " + this.Location + 
-                "(Available: " + this._capacity +")");
+                "(Available: " + this.Capacity +")");
         }
+
+
+        public int Capacity
+        { get; set; }
 
         public string Model
         {
@@ -69,11 +73,12 @@ namespace FirstProj
     {
         static void Main(string[] args)
         {
-            VendingMachine [] vm = new VendingMachine[3];
+            VendingMachine [] vm = new VendingMachine[4];
 
             vm[0] = new VendingMachine();
             vm[1] = new VendingMachine(300);
-            vm[2] = new VendingMachine();
+            vm[2] = new VendingMachine("Hallway");
+            vm[3] = new VendingMachine();
 
             vm[0].Location = "Lobby";
             vm[0].Model = "ChangeSiphon500";
@@ -84,7 +89,8 @@ namespace FirstProj
 
             for (int x=0; x < vm.Length; x++)
             {
-                vm[x].ShowStatus();
+                vm[x].ShowStatus(x);
+                Math.Pow( 2, 6 );
             }
             vm[1].DispenseItem();
             vm[1].ShowStatus();
